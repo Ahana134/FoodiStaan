@@ -1,0 +1,120 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+.main{
+    background-image: linear-gradient(to top, rgba(0,0,0,0.5),rgba(0,0,0,0.4)),url(food.jpg);
+    background-size:cover;
+    height: 100vh;
+    background-position: center;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+}
+.list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    list-style: none;
+}
+.list .item{
+    align-items: center;
+    text-align: justify;
+}
+.item{
+    margin: 3px;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-size: 2rem;
+    transition: 0.6s ease-in;
+}
+.item:hover{
+    background-color:coral;
+    color:azure;
+    border-radius: 10px;
+    padding: 0.3rem;
+    transform: translateY(-5px);
+}
+a{
+    text-decoration: none;
+    font-size: large;
+    color:darkblue;
+    float:right;
+    background-color:rgb(232, 199, 10);
+    padding: 10px;
+    margin-top: 60px;
+    margin-right: 50px;
+    border-radius: 4px;
+}
+.logo{
+    float: left;
+    /*padding-left: 40px;
+    padding-top: 20px;*/
+    margin-top: 5px;
+    filter: brightness(120%);
+    padding: 1rem;
+    width:15%;
+    flex: 1 1 40rem;
+    flex-wrap: wrap;
+}
+.biryani_logo{
+    position: relative;
+    animation: float 3s linear infinite;
+    top: 100px;
+    right:100px;
+    float: right;
+    overflow: hidden;
+    padding: 1rem;
+    width:35%;
+    flex: 1 1 40rem;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.about:hover .girl{
+    animation: slide1 2s linear;
+}
+h2{
+    color:#E28413;
+    float: left;
+}
+.about{
+    background-color: blanchedalmond;
+    display: flex;
+    color: chocolate;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 10px;
+}
+.about:hover .yes{
+    animation: slide2 2s linear;
+}
+.cities{
+    text-align: center;
+    background-color:whitesmoke;
+    padding: 20px;
+    color:chocolate;
+    font-family: sans-serif;
+}
+@keyframes float{
+    0%,100%{
+        transform: translateY(0rem);
+    }
+    50%{
+        transform: translateY(3rem);
+    }
+}
+@keyframes slide1 {
+    0%{
+        transform: translate(-400px);
+    }
+    100%{
+        transform: translate(0px);
+    }
+}
+@keyframes slide2 {
+    0%{
+        transform: translate(400px);
+    }
+    100%{
+        transform: translate(0px);
+    }
+}

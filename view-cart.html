@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Selected Food Items</title>
+  <style>
+    body {
+      /*width:100vw;
+      height:100vh;*/
+      background:linear-gradient(to top,#EE9344,bisque);;
+      box-sizing: border-box;
+    }
+    #selected-food-items-container{
+      background: bisque;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    #selected-food-items-container table tbody img{
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      align-items: center;
+    }
+    #selected-food-items-container table tbody .confirm{
+      margin-top: 29px;
+      margin-bottom: 20px;
+      margin-left: 2px;
+      text-align: center;
+    }
+    #selected-food-items-container table{
+      margin-left: auto;
+      margin-right: auto;
+      width: 75%;
+      text-align: center;}
+    table {
+      border-collapse: separate;
+      text-indent: initial;
+      border-spacing: 2px;
+    }
+    #selected-food-items-container table tbody td
+    {
+      padding: 30px;
+      font-size: 20px;
+    }
+    #selected-food-items-container table tbody p
+    {  
+      font-size: 20px;
+    }
+    #selected-food-items-container table tbody button
+    {
+      outline: none;
+      border: none;
+      font-size: 16px;
+      background: none;
+      background:brown;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 0px 5px;
+    }
+    #selected-food-items-container table tbody button:hover {
+      background-color:#df2c50;
+    }
+    #confirm{
+      background: linear-gradient(to top,#EE9344,bisque);
+      /*width: 100vw;*/
+      font-size: 20px;
+      padding: 20px;
+      background-size: cover;
+    }
+    #confirm p,#confirm label{
+      padding-top: 10px;
+      margin-left: 20px;
+    }
+    
+    #confirm input[type='text']{
+      padding: 5px;
+      margin: 15px;
+      border-radius: 4px;
+      border: 1px solid brown;
+      /*flex: 1 1 40rem;*/
+      width: 50%;
+    } 
+    #confirm select{
+      font-size: 15px;
+      width:35%;
+      border-radius: 4px;
+      padding: 5px;
+      margin-left: 5px;
+      border-color: #A9233E;
+    }
+    
+    #confirm label{
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+    #confirm button,.confirm{
+      flex: 1 1 40rem;
+      flex-wrap: wrap;
+      max-width: 80%;
+      margin-top: 37px;
+      margin-left: 21px;
+      margin-bottom: 25px;
+      padding: 10px;
+      background-color:brown;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 17px;
+      box-shadow:  2px 3px 6px #A9233E;
+    }
+    #confirm button:hover {
+      background-color:#CB2A4A;
+    }
+    th{
+      margin: 40px 10px;
+      margin-right: 50px;
+      padding: 20px 30px;
+      padding-bottom: 30px;
+      position: relative;
+      font-size: 23px;
+    }
+    #total-price{
+      text-align: center;
+    }
+    .title img{
+      max-width: 100px;
+      max-height: 100px;
+      margin-top: -25px;
+      filter: brightness(120%);
+      padding: 1em;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="selected-food-items-container">
+    <div class="title">
+      <img src="FoodiStaan logo.png" alt="">
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th><u>Image</u></th>
+          <th><u>Name</u></th>
+          <th><u>Quantity</u></th>
+          <th><u>Price</u></th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Populated dynamically with JavaScript -->
+      </tbody>
+    </table>
+  </div>
+  <div id="confirm"></div>
+  <script>
+
+    
+    // Retrieve the selectedItems array from localStorage
+    var selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+    console.log(selectedItems);
+    var c=0;
+
+    function finalPayment(){
+      c=c+1;
+      console.log(c);
+      if(c==1){
+        var confirmOrder = document.getElementById('confirm');
+        var adressprovide = document.createElement('p');
+        adressprovide.innerText = 'Enter your address:';
+        var address=document.createElement('input');
+        address.setAttribute('type','text');
+        var label = document.createElement("label");
+        label.innerHTML = "Choose your Payment Option: "
+        var dropdown = document.createElement("select");
+        var op = document.createElement("option");
+        op.text='Cash On Delivery';
+        op.value='Cash On Delivery';
+        dropdown.options.add(op);
+        confirmOrder.appendChild(adressprovide).appendChild(address);
+        confirmOrder.appendChild(label).appendChild(dropdown);
+        var btn4 = document.createElement('button');
+        btn4.setAttribute('class','finalpay');
+        btn4.innerText='Final Payment';
+        var yo=document.createElement('br');
+        confirmOrder.appendChild(yo);
+        confirmOrder.appendChild(btn4);
+        btn4.addEventListener('click', function () {
+          successPage();
+        });
+      }
+      else{
+        alert("you can make the payment of these orders only once.please refresh the page to make new orders");
+      }
+    }
+    
+
+    function successPage(){
+      localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+      var url = 'success.html';
+    
+      // Redirect to the new food item page
+      window.location.href = url;
+    }
+   
+    // Function to update the quantity and price for a selected item
+    function updateQuantityAndPrice(itemId, increment) {
+      var item = selectedItems.find(item => item.id === itemId);
+      var currprice=0;
+      console.log(item);
+      if (increment) {
+        item.quantity++;
+        currprice=(item.price*item.quantity-item.price*(item.quantity-1))/(item.quantity-1);
+        item.price = parseFloat((currprice * item.quantity).toFixed(2)); // Convert to number and round to 2 decimal places
+        
+      } 
+      else {
+        if (item.quantity > 1) {
+          currprice=(item.price*item.quantity-item.price*(item.quantity-1))/(item.quantity);
+          item.quantity--;
+          item.price = parseFloat((currprice * item.quantity).toFixed(2)); // Convert to number and round to 2 decimal places
+        }
+        else{
+          selectedItems = selectedItems.filter(item => item.id !== itemId);
+          localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+          populateSelectedFoodItems();
+        }
+      }
+
+      // Update the span elements displaying the quantity and price
+      var quantitySpan = document.getElementById('quantity-' + itemId);
+      var priceSpan = document.getElementById('price-' + itemId);
+      quantitySpan.innerText = item.quantity;
+      priceSpan.innerText = item.price.toFixed(2); // Display the price with 2 decimal places
+
+      // Update the total price in the cart
+      updateTotalPrice();
+
+      // Update the selectedItems array in localStorage
+      localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    }
+
+    // Function to calculate and update the total price in the cart
+    function updateTotalPrice() {
+      var totalPrice = selectedItems.reduce(function (acc, item) {
+        return acc + item.price;
+      }, 0);
+
+      // Update the total price element in the cart
+      var totalPriceSpan = document.getElementById('total-price');
+      totalPriceSpan.innerText = totalPrice.toFixed(2); // Display the total price with 2 decimal places
+
+      var rupeeprice=document.getElementById('total-price-in-rupees');
+      rupeeprice.innerText=(totalPrice*81.99).toFixed(2);
+    }
+
+    // Function to populate the selected food items on the page
+    var flag=false;
+    function populateSelectedFoodItems() {
+     
+        var tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = '';
+
+        selectedItems.forEach(function (Currentitem) {
+          var tableRow = document.createElement('tr');
+
+          // Create and populate the table cells
+          var rowData1 = document.createElement('td');
+          var img = document.createElement('img');
+          img.src = Currentitem.img;
+          rowData1.appendChild(img);
+          var x=Currentitem.id;
+
+          var rowData2 = document.createElement('td');
+          rowData2.innerText = Currentitem.name;
+
+          var rowData3 = document.createElement('td');
+          var btn1 = document.createElement('button');
+          btn1.setAttribute('class', 'decrease-item');
+          btn1.innerText = '-';
+          btn1.addEventListener('click', function () {
+            updateQuantityAndPrice(x, false);
+          });
+          var span = document.createElement('span');
+          span.id = 'quantity-' + x;
+          span.innerText = Currentitem.quantity;
+          var btn2 = document.createElement('button');
+          btn2.setAttribute('class', 'increase-item');
+          btn2.innerText = '+';
+          btn2.addEventListener('click', function () {
+            updateQuantityAndPrice(x, true);
+          });
+
+          console.log(Currentitem.price);
+
+          rowData3.appendChild(btn1);
+          rowData3.appendChild(span);
+          rowData3.appendChild(btn2);
+
+          var rowData4 = document.createElement('td');
+          var sign=document.createElement('span');
+          sign.innerText='$';
+          var food_price=document.createElement('span');
+          food_price.id = 'price-' + x;
+          food_price.innerText =Currentitem.price.toFixed(2); // Display the initial price with 2 decimal places
+
+          rowData4.appendChild(sign).appendChild(food_price);
+
+          tableRow.appendChild(rowData1);
+          tableRow.appendChild(rowData2);
+          tableRow.appendChild(rowData3);
+          tableRow.appendChild(rowData4);
+
+          tableBody.appendChild(tableRow);
+        });
+
+        // Render the total price element in the cart
+        var totalPriceDiv = document.createElement('div');
+        var totalPriceLabel = document.createElement('p');
+        totalPriceLabel.innerText = 'Total Price: $';
+        var totalPriceSpan = document.createElement('span');
+        totalPriceSpan.id = 'total-price';
+        totalPriceSpan.innerText = 0.00; // Set an initial value for total price with 2 decimal places
+        
+        
+        totalPriceLabel.appendChild(totalPriceSpan);
+        totalPriceDiv.appendChild(totalPriceLabel);
+        tableBody.appendChild(totalPriceDiv);
+
+        var totalPriceDiv1 = document.createElement('div');
+        var totalPriceLabel1 = document.createElement('p');
+        totalPriceLabel1.innerText = 'Total Price In Indian Rupees: Rs.';
+        var totalPriceSpan1 = document.createElement('span');
+        totalPriceSpan1.id = 'total-price-in-rupees';
+        totalPriceSpan1.innerText = 0.00;
+
+        totalPriceLabel1.appendChild(totalPriceSpan1);
+        totalPriceDiv1.appendChild(totalPriceLabel1);
+        tableBody.appendChild(totalPriceDiv1);
+
+        var btn3 = document.createElement('button');
+        btn3.setAttribute('class','confirm');
+        btn3.innerText='Confirm order';
+        btn3.addEventListener('click', function () {
+          finalPayment();
+        });
+        tableBody.appendChild(btn3);
+
+
+        // Update the total price initially
+        updateTotalPrice();
+     
+    }
+
+  
+
+    // Call the function to populate the selected food items when the page loads
+    window.onload = populateSelectedFoodItems;
+
+    
+  </script>
+</body>
+</html>

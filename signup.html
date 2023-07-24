@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <style>
+        h1,h3{
+            text-align: center;
+        }
+        
+        body {
+          font-family: Arial, sans-serif;
+          width:100%;
+          height: 100%;
+          background: linear-gradient(to top,#F6AE51,#FCE4C5);
+          background-size: cover;
+        }
+
+        .signup{
+          max-width: 400px;
+          margin: 0 auto;
+          padding-top: 30px;
+          padding-bottom: 30px;
+          padding-left: 20px;
+          padding-right: 35px;
+          border: 2px solid blue;
+          border-radius: 5px;
+          background: linear-gradient(to right,#FDA05E,#FFE7D6);
+          backdrop-filter: blur(8px);
+          box-shadow:  2px 3px 6px rosybrown;
+        }
+
+        .formdesign {
+            font-size: 15px;
+
+        }
+        #state,#cities,.formdesign input {
+            width: 80%;
+            padding: 7px 21px;
+            border: 1px solid blue;
+            margin: 14px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        .formerror {
+          background: whitesmoke;
+          color: red;
+          display: block;
+          border-radius: 3px;
+          text-align: center;
+          
+        }
+
+        .but {
+            border-radius: 31px;
+            width: 100px;
+            height: 50px;
+            border: 1px solid black;
+            font-size: 15px;
+            margin: 5px auto;
+        }
+        .buttons{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Be a part of out Foodie family!</h1>
+    <h3>Create your account here</h3>
+    <div class="signup">
+        <form action="login.html" name="myForm" onsubmit="return validateForm()">
+            <div class="formdesign" id="name1">
+                First Name: <br/>
+                <input type="text" name="fname" placeholder="Only Alphabets">
+                <b><span class="formerror"> </span></b>
+            </div>
+            <br/>
+            <div class="formdesign" id="name2">
+                Last Name:<br/>
+                <input type="text" name="lname" placeholder="Only Alphabets">
+                <b><span class="formerror"> </span></b>
+            </div>
+            <br/>
+            <div class="formdesign" id="email">
+                MailId:<br/>
+                <input type="email" name="fmail" placeholder="Alphanumeric">
+                <b><span class="formerror"> </span></b>
+            </div>
+            <br/>
+            <div class="formdesign" id="mobile">
+                Mobile Number:<br/>
+                <input type="text" name="fmobile" placeholder="only numeric">
+                <b><span class="formerror"> </span></b>
+            </div>
+            <br/>
+            <div class="formdesign">
+                Address line1:<br/>
+                <input type="text" placeholder="adress line 1">
+                <br/>
+                Address line2:<br/>
+                <input type="text" placeholder="adress line 2">
+            </div>
+            <br/>
+            <div class="formdesign" id="pass">
+                Password:<br/>
+                <input type="password" name="fpass" placeholder="minimum 8 length">
+                <b><span class="formerror"> </span></b>
+            </div>
+            <br/>
+            <div class="formdesign" id="cpass">
+                Confirm Password:<br/>
+                <input type="password" name="confirmps" placeholder="should be same as password">
+                <b><span class="formerror"> </span></b>
+            </div>
+            <br/>
+            State:<br/>
+            <div class="formdesign">
+                <select name="" id="state">
+                    <option value=""> Select State </option>
+                </select>
+                <br/>
+                City:<br/>
+                <select name="" id="cities">
+                    <option value=""> Select City </option>
+                </select>
+            </div>
+            <br/>
+            <div class="formdesign" id="pin">
+                Pin code:<br/>
+                <input type="text" name="fpincode" placeholder="enter pincode">
+                <b><span class="formerror"> </span></b>
+            </div>
+            <br/>
+            <div class="buttons">
+                <input type="reset" class="but" value="Clear"></input>
+                <button type="submit" class="but" value="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>

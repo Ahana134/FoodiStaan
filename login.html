@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          width:100vw;
+          height: 100vh;
+          background: linear-gradient(to top,#EF9A9A,rgb(250, 235, 215));
+          background-size: cover;
+        }
+    
+        .container {
+          max-width: 400px;
+          margin: 0 auto;
+          padding-top: 30px;
+          padding-bottom: 30px;
+          padding-left: 20px;
+          padding-right: 35px;
+          border: 2px solid blue;
+          border-radius: 5px;
+          background: linear-gradient(to right,#FCC8C2,#FDF0D5);
+          backdrop-filter: blur(8px);
+          box-shadow:  2px 3px 6px rosybrown;
+        }
+
+        .container input[type="text"],
+        .container input[type="password"] {
+          width: 100%;
+          padding: 10px;
+          margin-top: 10px;
+          margin-bottom: 15px;
+          border: 1.5px solid #ccc;
+          border-radius: 3px;
+          
+        }
+    
+        .container button {
+          width: 100%;
+          padding: 10px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    
+        .container button:hover {
+          background-color: #45a049;
+        }
+    
+        .container .forgot-password {
+          text-align: center;
+          margin-top: 10px;
+        }
+        h1,h3{
+            text-align: center;
+        }
+        #email_error,#pass_error{
+          margin-top: 5px;
+          width: 345px;
+          font-size: 18px;
+          color: #C62828;
+          background: rgba(255,0,0,0.1);
+          text-align: center;
+          padding: 5px 8px;
+          border-radius: 3px;
+          border: 1px solid #EF9A9A;
+          display: none;
+        }
+      </style>
+</head>
+<body>
+
+    <h1>Hi again foodie!!<br></h1>
+    <h3>Just Login to order your food here</h3>
+  
+    <div class="container">
+        <form action="home.html" name="form" onsubmit="return validated()">
+            Email ID/Mobile Number:
+            <input autocomplete="off" type="text" name="email" placeholder="Email ID / Mobile Number">
+            <div id="email_error">Please fill up your Email or Phone</div>
+            <br/><br/>
+            Password:
+            <input type="password" name="password" placeholder="Password">
+            <div id="pass_error">Please fill up your Password</div>
+            <br/><br/>
+            <button type="submit">Login</button>
+        </form>
+        <div class="forgot-password">
+            <br/>
+            <a href="#">Forgot Password</a>
+        </div> 
+        </form>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

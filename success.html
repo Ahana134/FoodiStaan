@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>success</title>
+    <style>
+        body{
+            width:100vw;
+            height: 100vh;
+            background:linear-gradient(to top,#D18C75,#FCECD9);
+            
+            font-size: 20px;
+        }
+        #order-placed,h1{
+            text-align: center;
+        }
+        .order-num{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 23px;
+            font-weight: 700;
+        }
+        .title img{
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: -95px;
+            filter: brightness(120%);
+            padding: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Placed</h1>
+    <div class="title">
+        <img src="FoodiStaan logo.png" alt="">
+    </div>
+    
+    <div id="order-placed"></div>
+</body>
+<script>
+    var selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+    console.log(selectedItems);
+    function successMessage(){
+        var message=document.getElementById('order-placed');
+        var h=document.createElement('p');
+        h.innerText='Your order is confirmed!!';
+        var hi=document.createElement('p');
+        hi.innerText='Your Order number is below please note it down for further use';
+        var hi1=document.createElement('p');
+        hi1.setAttribute('class','order-num');
+        var x=(Math.random()*1e32).toString(36);
+        hi1.innerText=x;
+        var hi2=document.createElement('p');
+        hi2.innerText="We'll be in touch with you through the mail provided by you to keep you updated on its progress. Till then be patient because after eating these delicious meals your taste buds will thank you. ";
+        message.appendChild(h);
+        message.appendChild(hi);
+        message.appendChild(hi1);
+        message.appendChild(hi2);
+    }
+    window.onload=successMessage;
+</script>
+</html>
